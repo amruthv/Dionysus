@@ -1,0 +1,8 @@
+#! /bin/bash
+
+brew tap homebrew/science
+brew info opencv
+brew install opencv
+
+pip install --upgrade pip
+pip install matplotlib
