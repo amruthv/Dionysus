@@ -17,7 +17,7 @@ type EmailUser struct {
 }
 
 var emailList = []string{"antoine.pourchet@gmail.com"}
-var lastCount = 100
+var lastCount = -1
 
 func cleanBody(body []byte) string {
 	return strings.Replace(string(body), "\n", "", -1)
@@ -72,6 +72,14 @@ func addEmailHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Email List: %v\n", emailList)
 }
 
+func lastCountHandler(w http.ResponseWriter, r *http.Request) {
+	if lastCount < 0 {
+		fmt.Fprintf(w, "We do not know how many bottles are left!")
+	} else {
+		fmt.Fprintf(w, "Last Count: %d\n", lastCount)
+	}
+}
+
 func countHandler(w http.ResponseWriter, r *http.Request) {
 	count := 0
 	if len(r.URL.RawQuery) == 0 {
@@ -95,5 +103,6 @@ func main() {
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/bottlecount", countHandler)
 	http.HandleFunc("/addemail", addEmailHandler)
+	http.HandleFunc("/lastcount", lastCountHandler)
 	http.ListenAndServe(":8080", nil)
 }
