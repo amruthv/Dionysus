@@ -17,17 +17,7 @@ type EmailUser struct {
 }
 
 var emailList = []string{"antoine.pourchet@gmail.com"}
-
-func statusHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "ok")
-	w.WriteHeader(200)
-}
-
-func addEmailHandler(w http.ResponseWriter, r *http.Request) {
-	body, _ := ioutil.ReadAll(r.Body)
-	emailList = append(emailList, cleanBody(body))
-	fmt.Println(emailList)
-}
+var lastCount = 100
 
 func cleanBody(body []byte) string {
 	return strings.Replace(string(body), "\n", "", -1)
@@ -62,15 +52,43 @@ func sendEmail(count int) {
 	}
 }
 
-func countHandler(w http.ResponseWriter, r *http.Request) {
-	bodyArr, _ := ioutil.ReadAll(r.Body)
-	body := cleanBody(bodyArr)
-	count, _ := strconv.Atoi(body)
+func statusHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "ok")
+	w.WriteHeader(200)
+}
 
+func addEmailHandler(w http.ResponseWriter, r *http.Request) {
+	addr := ""
+	if len(r.URL.RawQuery) == 0 {
+		body, _ := ioutil.ReadAll(r.Body)
+		addr = cleanBody(body)
+	} else {
+		addr = r.URL.Query().Get("email")
+	}
+	fmt.Printf("Email: '%s'\n", addr)
+	if len(addr) != 0 {
+		emailList = append(emailList, addr)
+	}
+	fmt.Printf("Email List: %v\n", emailList)
+}
+
+func countHandler(w http.ResponseWriter, r *http.Request) {
+	count := 0
+	if len(r.URL.RawQuery) == 0 {
+		bodyArr, _ := ioutil.ReadAll(r.Body)
+		body := cleanBody(bodyArr)
+		count, _ = strconv.Atoi(body)
+	} else {
+		countStr := r.URL.Query().Get("count")
+		count, _ = strconv.Atoi(countStr)
+	}
+	
+	fmt.Printf("Got a bottle count: %d\n", count)
 	fmt.Fprintf(w, "Bottle count: '%d'\n", count)
 	if count < 3 {
 		go sendEmail(count)
 	}
+	lastCount = count
 }
 
 func main() {
