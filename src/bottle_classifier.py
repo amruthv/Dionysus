@@ -1,16 +1,36 @@
 import dlib, sys, glob
 from skimage import io
+import datetime
+import shutil
+import time
+import datetime
+import os
 
-bottle_training = 'helpers/bottles_dataset.xml'
+
+bottle_training_data = 'helpers/bottles_dataset.xml'
 options = dlib.simple_object_detector_training_options()
 options.add_left_right_image_flips = True
 
+options.detection_window_size = 11200
 options.C = 4
 options.epsilon = 0.01
 options.num_threads = 8
 options.be_verbose = True
 
-dlib.train_simple_object_detector(bottle_training,"square_bottle_classifier.svm",options)
+dlib.train_simple_object_detector(bottle_training_data,"square_bottle_classifier.svm",options)
 
-# print "\nTraining accuracy: ", dlib.test_simple_object_detector(cups_training,"cupdetector.svm")
+ts = time.time()
+st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S') + '/'
+
+parentDir = 'models/'
+if not os.path.exists(parentDir + st):
+    os.makedirs(parentDir + st)
+    shutil.copyfile("square_bottle_classifier.svm", parentDir + st + "square_bottle_classifier.svm")
+    shutil.copyfile(bottle_training_data, parentDir + st + "bottles_dataset.xml")
+
+detector = dlib.simple_object_detector("square_bottle_classifier.svm")
+win = dlib.image_window()
+win.set_image(detector)
+
+# print "\nTraining accuracy: ", dlib.test_simple_object_detector(bottle_training_data, "square_bottle_classifier.svm")
 
