@@ -46,7 +46,7 @@ func sendEmail(count int) {
 		bodyString = "Running low, be aware"
 	}
 
-	emailUser := &EmailUser{"alwaysbeer.gypsies", "squaresquaresquare!", "smtp.gmail.com", 587}
+	emailUser := &EmailUser{"monitor.inventory", "squaresquaresquare1!", "smtp.gmail.com", 587}
 	auth := smtp.PlainAuth("",
 		emailUser.Username,
 		emailUser.Password,
@@ -104,7 +104,7 @@ func countHandler(w http.ResponseWriter, r *http.Request) {
 		countStr := r.URL.Query().Get("count")
 		count, _ = strconv.Atoi(countStr)
 	}
-	
+
 	fmt.Printf("Got a bottle count: %d\n", count)
 	fmt.Fprintf(w, "Bottle count: '%d'\n", count)
 	if count < 3 {
