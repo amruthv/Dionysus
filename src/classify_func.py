@@ -1,25 +1,16 @@
 import os
-#import dlib
+import dlib
 import sys
-#from skimage import io
+from skimage import io
 import numpy as np
 
 test_images_dir = '../test_images/'
 default_svm_param_file = "square_bottle_classifier.svm"
-
-detector = dlib.simple_object_detector("square_bottle_classifier.svm")
-
-win = dlib.image_window()
-test_dir = '/home/jyotiska/Dropbox/Computer Vision/Cups_test'
-convert_dir = '/home/jyotiska/Dropbox/Computer Vision/Cups_test_convert'
-
-assorted_dir = '../test_images/'
 rubric = '../test_images/rubric'
 
-items =os.listdir(assorted_dir)
-
-def classify(dir):
+def classify(dir, svm_param_file):
   detMap = {}
+  detector = dlib.simple_object_detector(svm_param_file)
   for dirr, _, files in os.walk(assorted_dir):
     for f in files:
       if f.endswith('.jpg'):
