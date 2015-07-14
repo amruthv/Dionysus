@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<?xml-stylesheet type='text/xsl' href='image_metadata_stylesheet.xsl'?>
+<dataset>
+<name>imglab dataset</name>
+<comment>Created by imglab tool.</comment>
+<images>
+  <image file='/Users/amruth/alwaysbeer/dataset/09-bierfles-1780.jpg'>
+    <box top='16' left='76' width='101' height='338'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/110458018_bd61d452d3.jpg'>
+    <box top='163' left='216' width='48' height='131'/>
+    <box top='177' left='188' width='48' height='125'/>
+    <box top='196' left='167' width='53' height='127'/>
+    <box top='191' left='129' width='57' height='140'/>
+    <box top='204' left='96' width='51' height='132'/>
+    <box top='200' left='56' width='55' height='135'/>
+    <box top='199' left='16' width='58' height='124'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/120972671_33cdd53a79.jpg'>
+    <box top='1' left='65' width='184' height='491'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/1232448955_ce63410fb9.jpg'>
+    <box top='2' left='120' width='133' height='299'/>
+    <box top='0' left='252' width='147' height='307'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/1526953695_f1bd826fd3.jpg'>
+    <box top='16' left='104' width='101' height='350'/>
+    <box top='55' left='0' width='103' height='310'/>
+    <box top='27' left='209' width='95' height='343'/>
+    <box top='26' left='309' width='90' height='340'/>
+    <box top='24' left='390' width='104' height='345'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/1527814204_33bf91e540.jpg'>
+    <box top='1' left='297' width='133' height='346'/>
+    <box top='0' left='195' width='117' height='347'/>
+    <box top='0' left='57' width='150' height='354'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/1527819206_f5690a1ca0.jpg'>
+    <box top='37' left='2' width='73' height='332'/>
+    <box top='40' left='80' width='100' height='336'/>
+    <box top='116' left='246' width='93' height='255'/>
+    <box top='71' left='163' width='77' height='298'/>
+    <box top='101' left='330' width='89' height='269'/>
+    <box top='78' left='404' width='96' height='291'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/1682033814_bd6ea7ffbf.jpg'>
+    <box top='4' left='2' width='291' height='484'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/190292936_f5bfb865ff.jpg'>
+    <box top='-64' left='-21' width='200' height='514'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2041391666_d475369790.jpg'>
+    <box top='41' left='90' width='203' height='458'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2148741587_b0fd3704ed.jpg'>
+    <box top='-43' left='132' width='182' height='354'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2197713083_1de7095808.jpg'>
+    <box top='13' left='37' width='159' height='481'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2219358121_871324b616.jpg'>
+    <box top='2' left='68' width='215' height='491'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2236846854_1099656f36.jpg'>
+    <box top='0' left='171' width='181' height='330'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2275776294_6dc8f0bd4b.jpg'>
+    <box top='58' left='72' width='143' height='429'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2276935598_da3c1fc4ef.jpg'>
+    <box top='1' left='201' width='114' height='375'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2276942122_d7b63cbdbc.jpg'>
+    <box top='1' left='116' width='107' height='366'/>
+    <box top='3' left='223' width='101' height='363'/>
+    <box top='2' left='326' width='102' height='367'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2276968160_3a0d275557.jpg'>
+    <box top='1' left='193' width='145' height='374'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2283473080_924051c96b.jpg'>
+    <box top='19' left='192' width='127' height='313'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2285157370_4c78627f57.jpg'>
+    <box top='4' left='187' width='130' height='340'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2286041303_fe84af58ef.jpg'>
+    <box top='65' left='22' width='278' height='433'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2286254585_096eb79400.jpg'>
+    <box top='183' left='131' width='130' height='239'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2289435265_93339f6ff3.jpg'>
+    <box top='1' left='168' width='148' height='348'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2330267081_091047a2c5.jpg'>
+    <box top='1' left='196' width='159' height='347'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2330267827_dd99e8508f.jpg'>
+    <box top='15' left='185' width='155' height='338'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2397339839_0e68117606.jpg'>
+    <box top='-63' left='139' width='213' height='384'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2446123300_71917335c9.jpg'>
+    <box top='11' left='187' width='146' height='437'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2463978650_e2193834a3.jpg'>
+    <box top='14' left='39' width='132' height='440'/>
+    <box top='47' left='156' width='111' height='404'/>
+    <box top='31' left='243' width='128' height='420'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2473226503_352075e76c.jpg'>
+    <box top='100' left='2' width='79' height='243'/>
+    <box top='98' left='77' width='67' height='229'/>
+    <box top='74' left='211' width='83' height='234'/>
+    <box top='105' left='363' width='67' height='222'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2513452640_59a4be3c5a.jpg'>
+    <box top='7' left='231' width='104' height='356'/>
+    <box top='19' left='161' width='75' height='337'/>
+    <box top='34' left='88' width='74' height='302'/>
+    <box top='43' left='39' width='81' height='282'/>
+    <box top='20' left='307' width='76' height='334'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2530174520_a3c3eb5820.jpg'>
+    <box top='0' left='88' width='167' height='487'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2538250479_959852707b.jpg'>
+    <box top='0' left='93' width='148' height='372'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2571641358_2321863128.jpg'>
+    <box top='44' left='333' width='89' height='265'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2588496220_4f47735b53.jpg'>
+    <box top='-2' left='47' width='130' height='321'/>
+    <box top='0' left='147' width='139' height='321'/>
+    <box top='1' left='265' width='106' height='321'/>
+    <box top='1' left='353' width='126' height='323'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2665067173_6a2e6ffb21.jpg'>
+    <box top='2' left='1' width='152' height='482'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2693737890_9c93ab25e1.jpg'>
+    <box top='72' left='103' width='157' height='411'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/278512367_cbe2fcd791.jpg'>
+    <box top='8' left='414' width='64' height='176'/>
+    <box top='5' left='327' width='55' height='183'/>
+    <box top='4' left='287' width='45' height='183'/>
+    <box top='6' left='248' width='42' height='175'/>
+    <box top='5' left='205' width='44' height='178'/>
+    <box top='4' left='163' width='44' height='179'/>
+    <box top='3' left='116' width='48' height='182'/>
+    <box top='5' left='80' width='42' height='184'/>
+    <box top='2' left='29' width='52' height='181'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2802228518_2627996375.jpg'>
+    <box top='23' left='14' width='137' height='381'/>
+    <box top='57' left='250' width='116' height='356'/>
+    <box top='6' left='368' width='125' height='366'/>
+    <box top='19' left='180' width='100' height='345'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2918751620_8e2b5aa9da.jpg'>
+    <box top='75' left='161' width='175' height='424'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/2934856656_471f703bd1.jpg'>
+    <box top='1' left='21' width='216' height='500'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/295558889_a74192589e.jpg'>
+    <box top='5' left='28' width='159' height='473'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/295563683_3d8f8c66d3.jpg'>
+    <box top='6' left='37' width='160' height='480'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/298084096_55e456f5ed.jpg'>
+    <box top='22' left='161' width='145' height='454'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/302393840_d2ae58227a.jpg'>
+    <box top='0' left='344' width='128' height='304'/>
+    <box top='0' left='228' width='141' height='332'/>
+    <box top='1' left='22' width='157' height='319'/>
+    <box top='1' left='149' width='117' height='290'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/3046711483_e970d013bc.jpg'>
+    <box top='17' left='7' width='78' height='252'/>
+    <box top='33' left='74' width='72' height='233'/>
+    <box top='28' left='131' width='61' height='224'/>
+    <box top='40' left='175' width='70' height='226'/>
+    <box top='20' left='221' width='62' height='238'/>
+    <box top='35' left='271' width='60' height='236'/>
+    <box top='41' left='324' width='61' height='225'/>
+    <box top='23' left='378' width='58' height='248'/>
+    <box top='30' left='426' width='63' height='245'/>
+    <box top='28' left='359' width='38' height='113'/>
+    <box top='92' left='177' width='68' height='177'/>
+    <box top='73' left='74' width='69' height='201'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/3062712040_041b3cd429.jpg'>
+    <box top='1' left='39' width='267' height='490'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/3169853654_3ffdb27f27.jpg'>
+    <box top='154' left='128' width='94' height='300'/>
+    <box top='196' left='58' width='83' height='253'/>
+    <box top='186' left='18' width='61' height='252'/>
+    <box top='168' left='214' width='73' height='278'/>
+    <box top='179' left='275' width='53' height='241'/>
+    <box top='205' left='257' width='55' height='216'/>
+    <box top='210' left='3' width='47' height='214'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/3183677923_7642d8e2e1.jpg'>
+    <box top='10' left='66' width='156' height='478'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/3190054689_2ffeae2d06.jpg'>
+    <box top='55' left='284' width='133' height='435'/>
+    <box top='12' left='150' width='138' height='478'/>
+    <box top='6' left='19' width='137' height='489'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/3354333538_e066e20bd4.jpg'>
+    <box top='0' left='52' width='213' height='493'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/3368378978_e0d0ce29f8.jpg'>
+    <box top='31' left='330' width='124' height='303'/>
+    <box top='29' left='37' width='122' height='302'/>
+    <box top='39' left='150' width='98' height='292'/>
+    <box top='37' left='242' width='98' height='288'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/3424706067_0a41f39bc6.jpg'>
+    <box top='22' left='72' width='161' height='455'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/3435871624_3bd31359f8.jpg'>
+    <box top='0' left='204' width='143' height='347'/>
+    <box top='2' left='103' width='111' height='342'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/3521110_cd648b94bf.jpg'>
+    <box top='94' left='222' width='41' height='86'/>
+    <box top='65' left='257' width='36' height='116'/>
+    <box top='68' left='292' width='31' height='114'/>
+    <box top='85' left='322' width='36' height='96'/>
+    <box top='52' left='351' width='36' height='129'/>
+    <box top='26' left='381' width='41' height='155'/>
+    <box top='62' left='188' width='41' height='120'/>
+    <box top='49' left='159' width='41' height='137'/>
+    <box top='66' left='127' width='41' height='121'/>
+    <box top='67' left='100' width='29' height='119'/>
+    <box top='53' left='418' width='34' height='124'/>
+    <box top='57' left='450' width='34' height='117'/>
+    <box top='63' left='62' width='37' height='125'/>
+    <box top='67' left='30' width='38' height='120'/>
+    <box top='51' left='0' width='32' height='139'/>
+    <box top='38' left='238' width='25' height='62'/>
+    <box top='29' left='95' width='19' height='42'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/352674831_b6cb2697ae.jpg'>
+    <box top='2' left='62' width='219' height='487'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/360500196_80ed9cadeb.jpg'>
+    <box top='0' left='152' width='233' height='491'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/371737244_b9fbd16519.jpg'>
+    <box top='-2' left='102' width='168' height='479'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/371919357_4edd2e5973.jpg'>
+    <box top='1' left='105' width='166' height='482'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/373337550_4e02f9be5c.jpg'>
+    <box top='0' left='96' width='161' height='479'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/413250621_4254d20871.jpg'>
+    <box top='6' left='100' width='215' height='367'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/44199487_d603ebca74.jpg'>
+    <box top='4' left='244' width='129' height='489'/>
+    <box top='28' left='192' width='117' height='433'/>
+    <box top='32' left='154' width='79' height='387'/>
+    <box top='46' left='128' width='71' height='349'/>
+    <box top='52' left='96' width='59' height='313'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/451802650_bf029bcd4a.jpg'>
+    <box top='42' left='142' width='89' height='334'/>
+    <box top='38' left='211' width='92' height='339'/>
+    <box top='26' left='300' width='92' height='351'/>
+    <box top='36' left='381' width='97' height='334'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/482855442_3e17d1cd6b.jpg'>
+    <box top='0' left='272' width='133' height='331'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/485010951_daa3058fd2.jpg'>
+    <box top='1' left='85' width='263' height='497'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/54965610_c2499d5315.jpg'>
+    <box top='-4' left='147' width='166' height='316'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/750703487_1eb0c478ef.jpg'>
+    <box top='30' left='5' width='85' height='279'/>
+    <box top='102' left='106' width='43' height='88'/>
+    <box top='101' left='160' width='42' height='92'/>
+    <box top='61' left='214' width='75' height='252'/>
+    <box top='95' left='307' width='40' height='85'/>
+    <box top='94' left='361' width='47' height='89'/>
+    <box top='99' left='417' width='46' height='86'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/835778479_82426d64df.jpg'>
+    <box top='20' left='0' width='209' height='372'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/Hauenstein-New-Ulm-Beer-Bottles-Paper-Label-John-Hauenstein-Company_30730-1.jpg'>
+    <box top='0' left='140' width='209' height='637'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/dataset/beerbott_01.jpg'>
+    <box top='1' left='113' width='97' height='237'/>
+  </image>
+</images>
+</dataset>
