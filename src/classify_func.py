@@ -15,7 +15,7 @@ detector = dlib.simple_object_detector("square_bottle_classifier.svm")
 # win = dlib.image_window()
 # test_dir = '/home/jyotiska/Dropbox/Computer Vision/Cups_test'
 # convert_dir = '/home/jyotiska/Dropbox/Computer Vision/Cups_test_convert'
-assorted_dir = 'convert_dir/'
+assorted_dir = '../test_images/'
 
 items =os.listdir(assorted_dir)
 
@@ -23,9 +23,7 @@ def classify(dir):
   for dirr, _, files in os.walk(assorted_dir):
     for f in files:
       if f.endswith('.jpg'):
-        print dirr + f
         im = io.imread(dirr + f)
-        print 'here'
         dets = detector(im)
         print f + ' had: ', len(dets)
 if __name__ == '__main__':
