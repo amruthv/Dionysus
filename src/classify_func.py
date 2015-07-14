@@ -1,23 +1,60 @@
 import os
-import dlib
+#import dlib
 import sys
-from skimage import io
+#from skimage import io
 import numpy as np
 
 test_images_dir = '../test_images/'
 default_svm_param_file = "square_bottle_classifier.svm"
 
-items =os.listdir(test_images_dir)
+detector = dlib.simple_object_detector("square_bottle_classifier.svm")
 
-def classify(dir, svm_param_file):
-    detector = dlib.simple_object_detector(svm_param_file)
-    for dirr, _, files in os.walk(test_images_dir):
-        sorted_files = sorted(files)
-        for f in files:
-            if f.endswith('.jpeg'):
-                im = io.imread(dirr + f)
-                dets = detector(im)
-                print f + ' had: ', len(dets)
+win = dlib.image_window()
+test_dir = '/home/jyotiska/Dropbox/Computer Vision/Cups_test'
+convert_dir = '/home/jyotiska/Dropbox/Computer Vision/Cups_test_convert'
+
+assorted_dir = '../test_images/'
+rubric = '../test_images/rubric'
+
+items =os.listdir(assorted_dir)
+
+def classify(dir):
+  detMap = {}
+  for dirr, _, files in os.walk(assorted_dir):
+    for f in files:
+      if f.endswith('.jpg'):
+        im = io.imread(dirr + f)
+        dets = detector(im)
+
+        # split filename take first piece
+        # match 'filename' with detected count
+        detMap[f.split('.')[0]] = len(dets)
+        print f + ' had: ', len(dets)
+
+  print "score = " + score(detMap)
+
+def score(detMap):
+    sc = 0
+    with open(rubric) as f:
+        content = f.readlines()
+
+    for line in content:
+        words = line.split(' ')
+        if int(words[0]) in detMap:
+            sc += getScore(words[1:], detMap[int(words[0])])
+
+    return float(sc) / float(len(detMap))
+
+def getScore(words, count):
+    rubric = {}
+    for word in words:
+        scorepair = word.split(":")
+        rubric[int(scorepair[0])] = int(scorepair[1])
+
+    if count in rubric:
+        return rubric[count]
+
+    return rubric[-1]
 
 if __name__ == '__main__':
     print sys.argv
@@ -26,3 +63,5 @@ if __name__ == '__main__':
     else:
         #use default svm file
         classify(test_images_dir, default_svm_param_file)
+
+# detector('convert_dir/image3.jpg')
