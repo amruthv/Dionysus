@@ -8,11 +8,12 @@ import os
 
 
 bottle_training_data = 'helpers/bottles_dataset.xml'
+img_list = 'fetch_images/image_urls.txt'
 options = dlib.simple_object_detector_training_options()
 options.add_left_right_image_flips = True
 
-options.detection_window_size = 11200
-options.C = 4
+# options.detection_window_size = 11200
+options.C = 1
 options.epsilon = 0.01
 options.num_threads = 8
 options.be_verbose = True
@@ -27,6 +28,7 @@ if not os.path.exists(parentDir + st):
     os.makedirs(parentDir + st)
     shutil.copyfile("square_bottle_classifier.svm", parentDir + st + "square_bottle_classifier.svm")
     shutil.copyfile(bottle_training_data, parentDir + st + "bottles_dataset.xml")
+    shutil.copyfile(img_list, parentDir + st + "image_urls.txt")
 
 detector = dlib.simple_object_detector("square_bottle_classifier.svm")
 win = dlib.image_window()
