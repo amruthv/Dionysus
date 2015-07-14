@@ -1,0 +1,20 @@
+#! /bin/bash
+
+if [ -z $1 ]
+then
+  t=10
+else
+  t=$1
+fi
+
+if [ -z "$2" ]
+then
+  n="lastpicture.png"
+else
+  n=$2
+fi
+
+while :; do
+  imagesnap -w 1.0 $n
+  sleep $t
+done
