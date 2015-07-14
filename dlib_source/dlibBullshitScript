@@ -1,0 +1,7 @@
+#!/bin/bash
+
+tar -xvf /project/dlib_source/*.bz2
+mv dlib-18.16 /project/dlib_source/
+cd /project/dlib_source/dlib-18.16/python_examples
+./compile_dlib_python_module.bat
+cp dlib.so ../src
