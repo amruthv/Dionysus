@@ -70,18 +70,19 @@ func statusHandler(w http.ResponseWriter, r *http.Request) {
 
 func addEmailHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Handler: addEmailHandler")
-	addr := ""
+	email := ""
 	if len(r.URL.RawQuery) == 0 {
 		body, _ := ioutil.ReadAll(r.Body)
-		addr = cleanBody(body)
+		email = cleanBody(body)
 	} else {
-		addr = r.URL.Query().Get("email")
+		email = r.URL.Query().Get("email")
 	}
-	fmt.Printf("Email: '%s'\n", addr)
-	if len(addr) != 0 {
-		emailList = append(emailList, addr)
+	fmt.Printf("Email: '%s'\n", email)
+	if len(email) != 0 {
+		emailList = append(emailList, email)
 	}
 	fmt.Printf("Email List: %v\n\n", emailList)
+	fmt.Fprintf(w, "Email added: %s", email)
 }
 
 func lastCountHandler(w http.ResponseWriter, r *http.Request) {
@@ -127,6 +128,7 @@ func removeEmailHandler(w http.ResponseWriter, r *http.Request) {
 		emailList = removeEmail(email)
 	}
 	fmt.Printf("Email List: %v\n\n", emailList)
+	fmt.Fprintf(w, "Email removed: %s", email)
 }
 
 func main() {
