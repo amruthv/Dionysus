@@ -19,6 +19,16 @@ type EmailUser struct {
 var emailList = []string{"antoine.pourchet@gmail.com"}
 var lastCount = -1
 
+func removeEmail(toremove string) []string {
+    newEmailList := []string{}
+    for _, email := range emailList {
+		if email != toremove {
+			newEmailList = append(newEmailList, email)
+		}
+	}
+	return newEmailList
+}
+
 func cleanBody(body []byte) string {
 	return strings.Replace(string(body), "\n", "", -1)
 }
@@ -53,11 +63,13 @@ func sendEmail(count int) {
 }
 
 func statusHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Handler: statusHandler")
 	fmt.Fprintf(w, "ok")
 	w.WriteHeader(200)
 }
 
 func addEmailHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Handler: addEmailHandler")
 	addr := ""
 	if len(r.URL.RawQuery) == 0 {
 		body, _ := ioutil.ReadAll(r.Body)
@@ -69,10 +81,11 @@ func addEmailHandler(w http.ResponseWriter, r *http.Request) {
 	if len(addr) != 0 {
 		emailList = append(emailList, addr)
 	}
-	fmt.Printf("Email List: %v\n", emailList)
+	fmt.Printf("Email List: %v\n\n", emailList)
 }
 
 func lastCountHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Handler: lastCountHandler")
 	if lastCount < 0 {
 		fmt.Fprintf(w, "We do not know how many bottles are left!")
 	} else {
@@ -81,6 +94,7 @@ func lastCountHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func countHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Handler: countHandler")
 	count := 0
 	if len(r.URL.RawQuery) == 0 {
 		bodyArr, _ := ioutil.ReadAll(r.Body)
@@ -99,10 +113,27 @@ func countHandler(w http.ResponseWriter, r *http.Request) {
 	lastCount = count
 }
 
+func removeEmailHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Handler: removeEmailHandler")
+	email := ""
+	if len(r.URL.RawQuery) == 0 {
+		body, _ := ioutil.ReadAll(r.Body)
+		email = cleanBody(body)
+	} else {
+		email = r.URL.Query().Get("email")
+	}
+	fmt.Printf("Email: '%s'\n", email)
+	if len(email) > 0 {
+		emailList = removeEmail(email)
+	}
+	fmt.Printf("Email List: %v\n\n", emailList)
+}
+
 func main() {
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/bottlecount", countHandler)
 	http.HandleFunc("/addemail", addEmailHandler)
 	http.HandleFunc("/lastcount", lastCountHandler)
+	http.HandleFunc("/removeemail", removeEmailHandler)
 	http.ListenAndServe(":8080", nil)
 }
