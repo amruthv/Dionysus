@@ -12,8 +12,8 @@ img_list = 'fetch_images/image_urls.txt'
 options = dlib.simple_object_detector_training_options()
 options.add_left_right_image_flips = True
 
-# options.detection_window_size = 11200
-options.C = 1
+# options.detection_window_size = 8000
+options.C = 4
 options.epsilon = 0.01
 options.num_threads = 8
 options.be_verbose = True

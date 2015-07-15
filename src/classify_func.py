@@ -10,10 +10,12 @@ rubric = '../test_images/rubric'
 
 def classify(dir, svm_param_file):
   detMap = {}
+  print type(svm_param_file)
   detector = dlib.simple_object_detector(svm_param_file)
-  for dirr, _, files in os.walk(assorted_dir):
+  print detector
+  for dirr, _, files in os.walk(test_images_dir):
     for f in files:
-      if f.endswith('.jpg'):
+      if f.endswith('.jpeg'):
         im = io.imread(dirr + f)
         dets = detector(im)
 
@@ -22,7 +24,7 @@ def classify(dir, svm_param_file):
         detMap[f.split('.')[0]] = len(dets)
         print f + ' had: ', len(dets)
 
-  print "score = " + score(detMap)
+  return score(detMap)
 
 def score(detMap):
     sc = 0
@@ -31,10 +33,9 @@ def score(detMap):
 
     for line in content:
         words = line.split(' ')
-        if int(words[0]) in detMap:
-            sc += getScore(words[1:], detMap[int(words[0])])
-
-    return float(sc) / float(len(detMap))
+        if words[0] in detMap:
+            sc += getScore(words[1:], detMap[words[0]])
+    return float(sc) / len(detMap)
 
 def getScore(words, count):
     rubric = {}
@@ -48,11 +49,11 @@ def getScore(words, count):
     return rubric[-1]
 
 if __name__ == '__main__':
-    print sys.argv
     if len(sys.argv) == 2:
-        classify(test_images_dir, sys.argv[1])
+        score = classify(test_images_dir, sys.argv[1])
     else:
         #use default svm file
-        classify(test_images_dir, default_svm_param_file)
+        score = classify(test_images_dir, default_svm_param_file)
+    print "score = ", score
 
 # detector('convert_dir/image3.jpg')
