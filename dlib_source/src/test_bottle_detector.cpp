@@ -32,12 +32,12 @@ int main(int argc, char** argv)
             cout << "Give the path to the training images directory as the argument to this program." << endl;
             return 0;
         }
-        const std::string images_directory = argv[1];
+        const std::string test_xml = argv[1];
         
         dlib::array<array2d<unsigned char> > images_test;
         std::vector<std::vector<rectangle> > face_boxes_test;
 
-        load_image_dataset(images_test, face_boxes_test, images_directory+"/test_images.xml");
+        load_image_dataset(images_test, face_boxes_test, test_xml);
         if (!silent) 
             cout << "num testing images:  " << images_test.size() << endl;
 
