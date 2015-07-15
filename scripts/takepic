@@ -8,4 +8,3 @@ else
 fi
 
 imagesnap -w 1.0 $n
-bash ./sendpic
