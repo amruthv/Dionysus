@@ -16,5 +16,7 @@ fi
 
 while :; do
   imagesnap -w 1.0 $n
+  # imagesnap -w 1.0 test_images/$(date +%y%m%d%H%M%S).jpg
+  # say "Picture taken"
   sleep $t
 done
