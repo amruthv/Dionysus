@@ -12,6 +12,6 @@ RUN apt-get install -yq python \
                         cmake \
                         libboost-python-dev
 RUN pip install -r /tmp/requirements.txt
-RUN bash /project/dlib_source/dlibBullshitInstallScript
+RUN bash /project/dlib_source/dlib_install
 
 CMD bash
