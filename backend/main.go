@@ -7,6 +7,7 @@ import (
 	"net/smtp"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type EmailUser struct {
@@ -16,8 +17,11 @@ type EmailUser struct {
 	Port        int
 }
 
+const EMAIL_PERIOD = time.Second * 1800
+
 var emailList = []string{"antoine.pourchet@gmail.com"}
 var lastCount = -1
+var lastImage = []byte{}
 
 func removeEmail(toremove string) []string {
     newEmailList := []string{}
@@ -65,7 +69,6 @@ func sendEmail(count int) {
 func statusHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Handler: statusHandler")
 	fmt.Fprintf(w, "ok")
-	w.WriteHeader(200)
 }
 
 func addEmailHandler(w http.ResponseWriter, r *http.Request) {
@@ -108,9 +111,6 @@ func countHandler(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Printf("Got a bottle count: %d\n", count)
 	fmt.Fprintf(w, "Bottle count: '%d'\n", count)
-	if count < 3 {
-		go sendEmail(count)
-	}
 	lastCount = count
 }
 
@@ -131,11 +131,39 @@ func removeEmailHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Email removed: %s", email)
 }
 
+func sendEmailHandler(w http.ResponseWriter, r *http.Request) {
+	sendEmail(lastCount)
+}
+
+func setImageHandler(w http.ResponseWriter, r *http.Request) {
+	lastImage, _ = ioutil.ReadAll(r.Body)
+	fmt.Println("Set the last image.")
+}
+
+func getImageHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "image/jpeg")
+	w.Header().Set("Content-Length", strconv.Itoa(len(lastImage)))
+	w.Write(lastImage)
+}
+
+func emailSender() {
+	ticker := time.NewTicker(EMAIL_PERIOD)
+	for _ = range ticker.C {
+		if lastCount < 3 && lastCount > 0 {
+			go sendEmail(lastCount)
+		}
+	}
+}
+
 func main() {
+	go emailSender()
 	http.HandleFunc("/_status", statusHandler)
-	http.HandleFunc("/bottlecount", countHandler)
-	http.HandleFunc("/addemail", addEmailHandler)
+	http.HandleFunc("/setcount", countHandler)
 	http.HandleFunc("/lastcount", lastCountHandler)
+	http.HandleFunc("/addemail", addEmailHandler)
 	http.HandleFunc("/removeemail", removeEmailHandler)
+	http.HandleFunc("/sendemail", sendEmailHandler)
+	http.HandleFunc("/setimage", setImageHandler)
+	http.HandleFunc("/getimage", getImageHandler)
 	http.ListenAndServe(":8080", nil)
 }
