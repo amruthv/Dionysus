@@ -9,7 +9,7 @@ fi
 
 if [ -z "$2" ]
 then
-  n="lastpicture.png"
+  n="lastpicture.jpeg"
 else
   n=$2
 fi
