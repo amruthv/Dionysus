@@ -22,6 +22,7 @@ const EMAIL_PERIOD = time.Second * 1800
 var emailList = []string{"antoine.pourchet@gmail.com"}
 var lastCount = -1
 var lastImage = []byte{}
+var fsm *FSM
 
 func removeEmail(toremove string) []string {
 	newEmailList := []string{}
@@ -63,6 +64,15 @@ func sendEmail(count int) {
 		[]byte(emailBody))
 	if err != nil {
 		fmt.Println("ERROR: attempting to send a mail ", err)
+	}
+}
+
+func emailSender() {
+	ticker := time.NewTicker(EMAIL_PERIOD)
+	for _ = range ticker.C {
+		if lastCount < 3 && lastCount > 0 {
+			go sendEmail(lastCount)
+		}
 	}
 }
 
@@ -147,19 +157,10 @@ func getImageHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "image/jpeg")
 	w.Header().Set("Content-Length", strconv.Itoa(len(lastImage)))
 	w.Write(lastImage)
+	go handleInput()
 }
 
-func emailSender() {
-	ticker := time.NewTicker(EMAIL_PERIOD)
-	for _ = range ticker.C {
-		if lastCount < 3 && lastCount > 0 {
-			go sendEmail(lastCount)
-		}
-	}
-}
-
-func main() {
-	go emailSender()
+func handleHandlers() {
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/setcount", countHandler)
 	http.HandleFunc("/lastcount", lastCountHandler)
@@ -168,5 +169,69 @@ func main() {
 	http.HandleFunc("/sendemail", sendEmailHandler)
 	http.HandleFunc("/setimage", setImageHandler)
 	http.HandleFunc("/getimage", getImageHandler)
+}
+
+func handleInput() {
+	// Save lastImage into file
+	ioutil.WriteFile("/tmp/lastpicture.jpeg", lastImage, 0644)
+	// Shellout to classifier
+	// out, err := exec.Command("/root/alwaysbeer").Output()
+	// Get output and make to integer
+	// fsm.Transition(input)
+}
+
+func startFSM() {
+	fsm = NewFSM()
+
+	fsm.AddState(0, func(input Input) int {
+		if input == 0 {
+			return 2
+		}
+		return 1
+	})
+	fsm.AddState(1, func(input Input) int {
+		if input != 0 {
+			return 1
+		}
+		return 2
+	})
+	fsm.AddState(2, func(input Input) int {
+		if input != 0 {
+			return 1
+		}
+		return 3
+	})
+	fsm.AddState(3, func(input Input) int {
+		if input != 0 {
+			return 1
+		}
+		return 4
+	})
+	fsm.AddState(4, func(input Input) int {
+		if input != 0 {
+			return 1
+		}
+		return 5
+	})
+	fsm.AddState(5, func(input Input) int {
+		if input != 0 {
+			return 1
+		}
+		sendEmail(lastCount)
+		return 6
+	})
+	fsm.AddState(6, func(input Input) int {
+		if input != 0 {
+			return 1
+		}
+		sendEmail(lastCount)
+		return 6
+	})
+}
+
+func main() {
+	go emailSender()
+	handleHandlers()
+	startFSM()
 	http.ListenAndServe(":8080", nil)
 }
