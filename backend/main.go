@@ -183,7 +183,8 @@ func handleInput() {
 		return
 	}
 	fmt.Printf("Output: %s", out)
-	// fsm.Transition(input)
+	lastCount, _ = strconv.Atoi(string(out))
+	fsm.Transition(Input(lastCount))
 }
 
 func startFSM() {
