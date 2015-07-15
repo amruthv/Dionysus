@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type Input int
 
 type State struct {
@@ -26,5 +28,7 @@ func (fsm *FSM) Start(startStateId int) {
 
 func (fsm *FSM) Transition(input Input) {
 	curr := fsm.States[fsm.CurrentStateId]
-	fsm.CurrentStateId = curr.Transition(input)
+	next := curr.Transition(input)
+	fmt.Printf("FSM transition (%d) -> (%d) -> (%d)\n", fsm.CurrentStateId, input, next)
+	fsm.CurrentStateId = next
 }

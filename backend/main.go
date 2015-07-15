@@ -182,8 +182,9 @@ func handleInput() {
 		fmt.Println(err)
 		return
 	}
-	fmt.Printf("Output: %s", out)
-	lastCount, _ = strconv.Atoi(string(out))
+	cleanOut := cleanBody(out)
+	fmt.Printf("Output: %s\n", cleanOut)
+	lastCount, _ = strconv.Atoi(cleanOut)
 	fsm.Transition(Input(lastCount))
 }
 
