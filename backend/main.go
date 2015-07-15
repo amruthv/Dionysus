@@ -19,11 +19,13 @@ type EmailUser struct {
 }
 
 const EMAIL_PERIOD = time.Second * 1800
+const EMAIL_WAIT = time.Second * 30
 
 var emailList = []string{"antoine.pourchet@gmail.com"}
 var lastCount = -1
 var lastImage = []byte{}
 var fsm *FSM
+var emailThreshold = time.Now()
 
 func removeEmail(toremove string) []string {
 	newEmailList := []string{}
@@ -217,13 +219,13 @@ func startFSM() {
 	})
 	fsm.AddState(4, func(input Input) int {
 		if input != 0 {
-			return 1
+			return 2
 		}
 		return 5
 	})
 	fsm.AddState(5, func(input Input) int {
 		if input != 0 {
-			return 1
+			return 3
 		}
 		sendEmail(lastCount)
 		return 6
@@ -232,7 +234,10 @@ func startFSM() {
 		if input != 0 {
 			return 1
 		}
-		sendEmail(lastCount)
+		if (time.Now().After(emailThreshold)) {
+			sendEmail(lastCount)
+			emailThreshold = time.Now().Add(EMAIL_WAIT)
+		}
 		return 6
 	})
 }
