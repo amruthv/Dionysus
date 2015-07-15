@@ -105,8 +105,10 @@ func lastCountHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Handler: lastCountHandler")
 	if lastCount < 0 {
 		fmt.Fprintf(w, "We do not know how many bottles are left!")
-	} else {
+	} else if lastCount == 0 {
 		fmt.Fprintf(w, "Last Count: %d\n", lastCount)
+	} else {
+		fmt.Fprintf(w, "There are at least %d bottles left!\n", lastCount)
 	}
 }
 
