@@ -150,6 +150,7 @@ func setImageHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Handler: setImageHandler")
 	lastImage, _ = ioutil.ReadAll(r.Body)
 	fmt.Println("Set the last image.")
+	go handleInput()
 }
 
 func getImageHandler(w http.ResponseWriter, r *http.Request) {
@@ -157,7 +158,6 @@ func getImageHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "image/jpeg")
 	w.Header().Set("Content-Length", strconv.Itoa(len(lastImage)))
 	w.Write(lastImage)
-	go handleInput()
 }
 
 func handleHandlers() {

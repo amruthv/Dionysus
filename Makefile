@@ -1,11 +1,9 @@
 .PHONY: all
 
 all:
-	service alwaysbeer stop;\
-	go run backend/main.go
-
-start: 
-	service alwaysbeer start
+	cd backend &&\
+	go build &&\
+	service alwaysbeer restart
 
 docker:
 	docker build -t alwaysbeer .
