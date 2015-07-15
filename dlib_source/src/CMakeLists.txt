@@ -27,18 +27,10 @@ ENDMACRO()
 
 
 #here we apply our macros
-add_example(mine)
+add_example(train_bottle_detector)
+add_example(test_bottle_detector)
 
 find_package(OpenCV)
 if (OpenCV_FOUND)
    include_directories(${OpenCV_INCLUDE_DIRS})
-
-   ADD_EXECUTABLE(webcam_face_pose_ex webcam_face_pose_ex.cpp)
-   TARGET_LINK_LIBRARIES(webcam_face_pose_ex dlib ${OpenCV_LIBS} )
 endif()
-
-
-if (DLIB_LINK_WITH_SQLITE3)
-   add_example(sqlite_ex)
-endif()
-

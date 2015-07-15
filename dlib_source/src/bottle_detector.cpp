@@ -55,7 +55,7 @@ int main(int argc, char** argv)
         
         trainer.set_num_threads(8);
         
-        trainer.set_c(10);
+        trainer.set_c(4);
 
         trainer.set_epsilon(0.01);
         
@@ -67,22 +67,6 @@ int main(int argc, char** argv)
         object_detector<image_scanner_type> detector = trainer.train(images_train, face_boxes_train);
 
         cout << "training results: " << test_object_detection_function(detector, images_train, face_boxes_train) << endl;
-        cout << "testing results:  " << test_object_detection_function(detector, images_test, face_boxes_test) << endl;        
-        image_window hogwin(draw_fhog(detector), "Learned fHOG detector");
-        image_window win; 
-        for (unsigned long i = 0; i < images_test.size(); ++i) {
-            std::vector<rectangle> dets = detector(images_test[i]);
-            
-            cout << "number of detections" << dets.size() << endl;
-            if (dets.size() != 0) {
-                win.clear_overlay();
-                win.set_image(images_test[i]);
-                win.add_overlay(dets, rgb_pixel(255,0,0));
-                cout << "Hit enter to process the next image..." << endl;
-                cin.get();
-            }
-        }
-
 
         time_t rawtime;
         struct tm * timeinfo;
@@ -93,9 +77,6 @@ int main(int argc, char** argv)
         
         std::string timestamp_dir = "models/" + string(buffer);
 
-        // system("mkdir " + timestamp_dir);
-        // char timestamp_dir_arr[1024];
-        // strcpy(timestamp_dir_arr, timestamp_dir);
         mkdir(timestamp_dir.c_str(), 0777);
         serialize(timestamp_dir + "/bottle_classifier.svm") << detector;
         serialize("bottle_classifier.svm") << detector;
