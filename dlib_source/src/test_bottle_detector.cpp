@@ -22,8 +22,12 @@ int main(int argc, char** argv)
 {  
 
     try
-    {
-        if (argc != 2)
+    {   
+        bool silent = false;
+        if (argc == 3){
+            silent = true;
+        }
+        if (argc < 2)
         {
             cout << "Give the path to the training images directory as the argument to this program." << endl;
             return 0;
@@ -34,26 +38,36 @@ int main(int argc, char** argv)
         std::vector<std::vector<rectangle> > face_boxes_test;
 
         load_image_dataset(images_test, face_boxes_test, images_directory+"/test_images.xml");
-        cout << "num testing images:  " << images_test.size() << endl;
+        if (!silent) 
+            cout << "num testing images:  " << images_test.size() << endl;
 
         typedef scan_fhog_pyramid<pyramid_down<6> > image_scanner_type; 
         object_detector<image_scanner_type> detector;
         deserialize("bottle_classifier.svm") >> detector;
 
-        cout << "testing results:  " << test_object_detection_function(detector, images_test, face_boxes_test) << endl;        
-        image_window hogwin(draw_fhog(detector), "Learned fHOG detector");
-        image_window win; 
-        for (unsigned long i = 0; i < images_test.size(); ++i) {
-            std::vector<rectangle> dets = detector(images_test[i]);
-            
-            cout << "number of detections" << dets.size() << endl;
-            if (dets.size() != 0) {
-                win.clear_overlay();
-                win.set_image(images_test[i]);
-                win.add_overlay(dets, rgb_pixel(255,0,0));
-                cout << "Hit enter to process the next image..." << endl;
-                cin.get();
+        if (!silent) {
+            cout << "testing results:  " << test_object_detection_function(detector, images_test, face_boxes_test) << endl;   
+            image_window hogwin(draw_fhog(detector), "Learned fHOG detector");
+            image_window win; 
+        
+            for (unsigned long i = 0; i < images_test.size(); ++i) {
+                std::vector<rectangle> dets = detector(images_test[i]);
+                
+                cout << "number of detections" << dets.size() << endl;
+                if (dets.size() != 0) {
+                    win.clear_overlay();
+                    win.set_image(images_test[i]);
+                    win.add_overlay(dets, rgb_pixel(255,0,0));
+                    cout << "Hit enter to process the next image..." << endl;
+                    cin.get();
+                }
             }
+        }
+        else {
+            for (unsigned long i = 0; i < images_test.size(); ++i) {
+                std::vector<rectangle> dets = detector(images_test[i]);
+                cout << dets.size() << endl;
+            } 
         }
     } catch (exception& e) {
         cout << "\nexception thrown!" << endl;
