@@ -2,9 +2,9 @@
 
 if [ -z "$1" ]
 then
-  n="lastpicture.png"
+  n="lastpicture.jpeg"
 else
-  n=$2
+  n=$1
 fi
 
 cat $n | http GET http://ec2-52-26-105-48.us-west-2.compute.amazonaws.com:8080/setimage
