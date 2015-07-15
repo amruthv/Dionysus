@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/smtp"
+	"os/exec"
 	"strconv"
 	"strings"
 	"time"
@@ -175,8 +176,13 @@ func handleInput() {
 	// Save lastImage into file
 	ioutil.WriteFile("/tmp/lastpicture.jpeg", lastImage, 0644)
 	// Shellout to classifier
-	// out, err := exec.Command("/root/alwaysbeer").Output()
+	out, err := exec.Command("/root/alwaysbeer/src/test_bottle_detector", "/root/alwaysbeer/src/single/test_images.xml", "silent").Output()
 	// Get output and make to integer
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("Output: %s", out)
 	// fsm.Transition(input)
 }
 
