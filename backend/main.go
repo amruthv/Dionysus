@@ -24,8 +24,8 @@ var lastCount = -1
 var lastImage = []byte{}
 
 func removeEmail(toremove string) []string {
-    newEmailList := []string{}
-    for _, email := range emailList {
+	newEmailList := []string{}
+	for _, email := range emailList {
 		if email != toremove {
 			newEmailList = append(newEmailList, email)
 		}
@@ -132,15 +132,18 @@ func removeEmailHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func sendEmailHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Handler: sendEmailHandler")
 	sendEmail(lastCount)
 }
 
 func setImageHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Handler: setImageHandler")
 	lastImage, _ = ioutil.ReadAll(r.Body)
 	fmt.Println("Set the last image.")
 }
 
 func getImageHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Handler: getImageHandler")
 	w.Header().Set("Content-Type", "image/jpeg")
 	w.Header().Set("Content-Length", strconv.Itoa(len(lastImage)))
 	w.Write(lastImage)
