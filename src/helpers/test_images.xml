@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<?xml-stylesheet type='text/xsl' href='image_metadata_stylesheet.xsl'?>
+<dataset>
+<name>imglab dataset</name>
+<comment>Created by imglab tool.</comment>
+<images>
+  <image file='/Users/amruth/alwaysbeer/test_images/0.jpeg'>
+    <box top='24' left='167' width='210' height='554'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/1.jpeg'>
+    <box top='42' left='292' width='203' height='619'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/10.jpeg'>
+    <box top='88' left='306' width='229' height='629'/>
+    <box top='110' left='518' width='201' height='607'/>
+    <box top='54' left='464' width='123' height='335'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/11.jpeg'>
+    <box top='94' left='306' width='225' height='625'/>
+    <box top='102' left='512' width='209' height='621'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/12.jpeg'>
+    <box top='84' left='300' width='225' height='631'/>
+    <box top='96' left='502' width='203' height='621'/>
+    <box top='54' left='668' width='171' height='649'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/13.jpeg'>
+    <box top='92' left='298' width='229' height='623'/>
+    <box top='104' left='516' width='211' height='601'/>
+    <box top='68' left='714' width='201' height='643'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/14.jpeg'>
+    <box top='92' left='302' width='253' height='623'/>
+    <box top='104' left='578' width='255' height='615'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/15.jpeg'>
+    <box top='90' left='314' width='233' height='629'/>
+    <box top='102' left='596' width='209' height='619'/>
+    <box top='42' left='776' width='175' height='667'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/16.jpeg'>
+    <box top='108' left='318' width='221' height='607'/>
+    <box top='126' left='458' width='119' height='335'/>
+    <box top='94' left='518' width='199' height='623'/>
+    <box top='70' left='718' width='207' height='645'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/17.jpeg'>
+    <box top='52' left='716' width='215' height='661'/>
+    <box top='162' left='298' width='245' height='557'/>
+    <box top='104' left='528' width='195' height='609'/>
+    <box top='58' left='444' width='135' height='369'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/18.jpeg'>
+    <box top='66' left='710' width='211' height='621'/>
+    <box top='170' left='306' width='239' height='551'/>
+    <box top='96' left='530' width='197' height='615'/>
+    <box top='58' left='446' width='141' height='359'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/19.jpeg'>
+    <box top='166' left='290' width='255' height='555'/>
+    <box top='86' left='434' width='201' height='579'/>
+    <box top='118' left='618' width='209' height='597'/>
+    <box top='48' left='756' width='149' height='647'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/2.jpeg'>
+    <box top='12' left='696' width='211' height='575'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/20.jpeg'>
+    <box top='162' left='314' width='229' height='557'/>
+    <box top='70' left='834' width='247' height='645'/>
+    <box top='112' left='622' width='213' height='605'/>
+    <box top='82' left='498' width='191' height='613'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/21.jpeg'>
+    <box top='172' left='126' width='285' height='547'/>
+    <box top='104' left='390' width='241' height='617'/>
+    <box top='88' left='628' width='207' height='631'/>
+    <box top='718' left='834' width='3' height='3'/>
+    <box top='64' left='838' width='241' height='653'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/22.jpeg'>
+    <box top='136' left='234' width='215' height='547'/>
+    <box top='94' left='434' width='197' height='591'/>
+    <box top='88' left='650' width='163' height='581'/>
+    <box top='56' left='794' width='181' height='603'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/23.jpeg'>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/24.jpeg'>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/25.jpeg'>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/26.jpeg'>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/27.jpeg'>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/28.jpeg'>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/29.jpeg'>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/3.jpeg'>
+    <box top='34' left='160' width='211' height='565'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/30.jpeg'>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/31.jpeg'>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/32.jpeg'>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/33.jpeg'>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/34.jpeg'>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/4.jpeg'>
+    <box top='6' left='46' width='241' height='555'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/5.jpeg'>
+    <box top='86' left='366' width='209' height='579'/>
+    <box top='96' left='714' width='203' height='597'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/6.jpeg'>
+    <box top='112' left='444' width='233' height='603'/>
+    <box top='86' left='360' width='203' height='587'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/7.jpeg'>
+    <box top='108' left='326' width='235' height='611'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/8.jpeg'>
+    <box top='102' left='312' width='239' height='609'/>
+    <box top='108' left='660' width='221' height='611'/>
+  </image>
+  <image file='/Users/amruth/alwaysbeer/test_images/9.jpeg'>
+    <box top='104' left='306' width='235' height='615'/>
+    <box top='104' left='510' width='215' height='611'/>
+  </image>
+</images>
+</dataset>
