@@ -25,6 +25,7 @@ const EMAIL_WAIT = time.Second * 30
 var slackHooks = []string{"https://hooks.slack.com/services/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"}
 var emailList = []string{"antoine.pourchet@gmail.com"}
 var lastCount = -1
+var slackToken = ""
 var lastImage = []byte{}
 var fsm *FSM
 var emailThreshold = time.Now()
@@ -199,6 +200,16 @@ func addSlackHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "slack added: %s", slack)
 }
 
+func secretHandler(w http.ResponseWriter, r *http.Request) {
+	if len(r.URL.RawQuery) == 0 {
+		body, _ := ioutil.ReadAll(r.Body)
+		slackToken = cleanBody(body)
+	} else {
+		slackToken = r.URL.Query().Get("slack")
+	}
+	fmt.Fprintf(w, "slack token added: %s", slackToken)
+}
+
 func removeSlackHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Handler: removeEmailHandler")
 	slack := ""
@@ -233,6 +244,7 @@ func addSlackHook(slack string) []string {
 func handleHandlers() {
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/setcount", countHandler)
+	http.HandleFunc("/setslacksecret", secretHandler)
 	http.HandleFunc("/lastcount", lastCountHandler)
 	http.HandleFunc("/addemail", addEmailHandler)
 	http.HandleFunc("/removeemail", removeEmailHandler)
