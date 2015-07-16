@@ -241,12 +241,19 @@ func addSlackHook(slack string) []string {
 	return append(slackHooks, slack)
 }
 
+func listEmailsHandler(w http.ResponseWriter, r *http.Request) {
+	for _, email := range emailList {
+		fmt.Println(email)
+	}
+}
+
 func handleHandlers() {
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/setcount", countHandler)
 	http.HandleFunc("/setslacksecret", secretHandler)
 	http.HandleFunc("/lastcount", lastCountHandler)
 	http.HandleFunc("/addemail", addEmailHandler)
+	http.HandleFunc("/listemails", listEmailsHandler)
 	http.HandleFunc("/removeemail", removeEmailHandler)
 	http.HandleFunc("/sendemail", sendEmailHandler)
 	http.HandleFunc("/setimage", setImageHandler)
