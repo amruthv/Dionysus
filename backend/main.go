@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -21,11 +22,28 @@ type EmailUser struct {
 const EMAIL_PERIOD = time.Second * 1800
 const EMAIL_WAIT = time.Second * 30
 
+var slackHooks = []string{"https://hooks.slack.com/services/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", "https://hooks.slack.com/services/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"}
 var emailList = []string{"antoine.pourchet@gmail.com"}
 var lastCount = -1
 var lastImage = []byte{}
 var fsm *FSM
 var emailThreshold = time.Now()
+
+func sendSlackMessage(msg string) {
+	message := fmt.Sprintf("{\"text\": \"%s\"}", msg)
+	for _, hook := range slackHooks {
+		resp, err := http.Post(hook, "text", bytes.NewReader([]byte(message)))
+		if err != nil {
+			fmt.Println("post to slack failed")
+			fmt.Println(err)
+			return
+		}
+		if resp.StatusCode != 200 {
+			fmt.Println("post to slack failed")
+			fmt.Println(resp.StatusCode)
+		}
+	}
+}
 
 func removeEmail(toremove string) []string {
 	newEmailList := []string{}
@@ -54,6 +72,7 @@ func sendEmail(count int) {
 		bodyString = "Running low, be aware"
 	}
 
+	go sendSlackMessage(bodyString)
 	emailUser := &EmailUser{"monitor.inventory", "squaresquaresquare1!", "smtp.gmail.com", 587}
 	auth := smtp.PlainAuth("",
 		emailUser.Username,
@@ -165,6 +184,41 @@ func getImageHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(lastImage)
 }
 
+func addSlackHandler(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func removeSlackHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Handler: removeEmailHandler")
+	slack := ""
+	if len(r.URL.RawQuery) == 0 {
+		body, _ := ioutil.ReadAll(r.Body)
+		slack = cleanBody(body)
+	} else {
+		slack = r.URL.Query().Get("slack")
+	}
+	fmt.Printf("slackhook: '%s'\n", slack)
+	if len(slack) > 0 {
+		slackHooks = removeSlackHook(slack)
+	}
+	fmt.Printf("Slack List: %v\n\n", slackHooks)
+	fmt.Fprintf(w, "Slack hook removed: %s", slack)
+}
+
+func removeSlackHook(toremove string) []string {
+	slackList := []string{}
+	for _, slack := range slackHooks {
+		if slack != toremove {
+			slackList = append(slackList, slack)
+		}
+	}
+	return slackList
+}
+
+func addSlackHook(slack string) []string {
+	return append(slackHooks, slack)
+}
+
 func handleHandlers() {
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/setcount", countHandler)
@@ -174,6 +228,8 @@ func handleHandlers() {
 	http.HandleFunc("/sendemail", sendEmailHandler)
 	http.HandleFunc("/setimage", setImageHandler)
 	http.HandleFunc("/getimage", getImageHandler)
+	http.HandleFunc("/addslackhook", addSlackHandler)
+	http.HandleFunc("/removelackhook", removeSlackHandler)
 }
 
 func handleInput() {
@@ -236,7 +292,7 @@ func startFSM() {
 		if input != 0 {
 			return 1
 		}
-		if (time.Now().After(emailThreshold)) {
+		if time.Now().After(emailThreshold) {
 			sendEmail(lastCount)
 			emailThreshold = time.Now().Add(EMAIL_WAIT)
 		}
