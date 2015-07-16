@@ -247,6 +247,10 @@ func listEmailsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func defaultHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("welcome to the \"inventory bot\"")
+}
+
 func handleHandlers() {
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/setcount", countHandler)
@@ -260,6 +264,7 @@ func handleHandlers() {
 	http.HandleFunc("/getimage", getImageHandler)
 	http.HandleFunc("/addslackhook", addSlackHandler)
 	http.HandleFunc("/removelackhook", removeSlackHandler)
+	http.HandleFunc("/", defaultHandler)
 }
 
 func handleInput() {
