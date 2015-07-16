@@ -22,7 +22,7 @@ type EmailUser struct {
 const EMAIL_PERIOD = time.Second * 1800
 const EMAIL_WAIT = time.Second * 30
 
-var slackHooks = []string{"https://hooks.slack.com/services/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", "https://hooks.slack.com/services/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"}
+var slackHooks = []string{"https://hooks.slack.com/services/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"}
 var emailList = []string{"antoine.pourchet@gmail.com"}
 var lastCount = -1
 var lastImage = []byte{}
@@ -34,13 +34,11 @@ func sendSlackMessage(msg string) {
 	for _, hook := range slackHooks {
 		resp, err := http.Post(hook, "text", bytes.NewReader([]byte(message)))
 		if err != nil {
-			fmt.Println("post to slack failed")
-			fmt.Println(err)
+			fmt.Println("failed with error: ", err)
 			return
 		}
 		if resp.StatusCode != 200 {
-			fmt.Println("post to slack failed")
-			fmt.Println(resp.StatusCode)
+			fmt.Println("failed with code: ", resp.StatusCode)
 		}
 	}
 }
@@ -185,7 +183,20 @@ func getImageHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func addSlackHandler(w http.ResponseWriter, r *http.Request) {
-
+	fmt.Println("Handler: addSlackHandler")
+	slack := ""
+	if len(r.URL.RawQuery) == 0 {
+		body, _ := ioutil.ReadAll(r.Body)
+		slack = cleanBody(body)
+	} else {
+		slack = r.URL.Query().Get("slack")
+	}
+	fmt.Printf("slack: '%s'\n", slack)
+	if len(slack) != 0 {
+		slackHooks = append(slackHooks, slack)
+	}
+	fmt.Printf("slack List: %v\n\n", slackHooks)
+	fmt.Fprintf(w, "slack added: %s", slack)
 }
 
 func removeSlackHandler(w http.ResponseWriter, r *http.Request) {
