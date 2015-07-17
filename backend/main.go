@@ -337,7 +337,7 @@ func aboutHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, fmt.Sprintf("error parsing url %v", err), 500)
 	}
-	tmplt.ExecuteTemplate(w, "about.html", Page{Title: "Square Inventory"})
+	tmplt.ExecuteTemplate(w, "test.html", Page{Title: "Square Inventory"})
 }
 
 func getApkHandler(w http.ResponseWriter, r *http.Request) {
@@ -347,11 +347,8 @@ func getApkHandler(w http.ResponseWriter, r *http.Request) {
 
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "text/html")
-	err := r.ParseForm()
-	if err != nil {
-		http.Error(w, fmt.Sprintf("error parsing url %v", err), 500)
-	}
-	tmplt.ExecuteTemplate(w, "test.html", Page{Title: "Square Inventory"})
+	html, _ := ioutil.ReadFile("../static/test.html")
+	fmt.Fprintf(w, "%s", html)
 }
 
 func requestListHandler(w http.ResponseWriter, r *http.Request) {
@@ -380,6 +377,8 @@ func PrintList(w http.ResponseWriter, list []string) {
 }
 
 func handleHandlers() {
+	//http.Handle("/apk", http.FileServer(http.Dir("../mobile/apk/app-debug-unaligned.apk")))
+
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/setcount", countHandler)
 	http.HandleFunc("/setslacksecret", secretHandler)

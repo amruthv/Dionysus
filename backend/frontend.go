@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-var tmplt = template.Must(template.ParseFiles("static/test.html"))
+var tmplt = template.Must(template.ParseFiles("../static/test.html"))
 
 type Page struct {
 	Title string
