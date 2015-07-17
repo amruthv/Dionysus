@@ -5,6 +5,18 @@
 
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		function update() {
+			$.get("/lastcount", function(data) {
+				console.log("lastcount: " + data)
+				$("#thefuckingcount").html(data)
+			});
+		}
+		setInterval(update, 1000);
+		$(document).ready(function() {
+			update()
+		});
+	</script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -15,6 +27,17 @@
 			background-size: 100% auto;
 		}
 		.navbar {margin-bottom: 0px;}
+		#thefuckingcount {
+			position: absolute;
+			top: 30%;
+			left: 50%;
+			margin-top: -50px;
+			margin-left: -50px;
+			width: 100px;
+			height: 100px;
+			font-size: 20em;
+			color: #aaaaaa;
+		}
     </style>
   </head>
 
@@ -30,5 +53,7 @@
         </ul>
       </div>
     </nav>
+	<div id="thefuckingcount">
+	</div>
   </body>
 </html>
