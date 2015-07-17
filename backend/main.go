@@ -356,7 +356,7 @@ func requestListHandler(w http.ResponseWriter, r *http.Request) {
 
 func PrintList(w http.ResponseWriter, list []string) {
 	for _, item := range list {
-		fmt.Fprintf(w, item)
+		fmt.Fprintf(w, fmt.Sprintf("%s\n", item))
 	}
 }
 
