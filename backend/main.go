@@ -332,15 +332,6 @@ func disableEmailHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "email disabled")
 }
 
-func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "text/html")
-	err := r.ParseForm()
-	if err != nil {
-		http.Error(w, fmt.Sprintf("error parsing url %v", err), 500)
-	}
-	tmplt.ExecuteTemplate(w, "test.html", Page{Title: "Square Inventory"})
-}
-
 func getApkHandler(w http.ResponseWriter, r *http.Request) {
 	apk, _ := ioutil.ReadFile("../mobile/apk/app-debug-unaligned.apk")
 	fmt.Fprintf(w, "%s", apk)
@@ -379,6 +370,7 @@ func PrintList(w http.ResponseWriter, list []string) {
 
 func handleHandlers() {
 	http.Handle("/apk/", http.StripPrefix("/apk/", http.FileServer(http.Dir(os.Getenv("APK_PATH")))))
+	http.Handle("/", http.StripPrefix("/", http.FileServer(http.Dir(os.Getenv("STATIC_PATH")))))
 
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/setcount", countHandler)
@@ -397,7 +389,6 @@ func handleHandlers() {
 	http.HandleFunc("/disableemail", disableEmailHandler)
 	http.HandleFunc("/addreq", requestListHandler)
 	http.HandleFunc("/viewreq", requestListHandler)
-	http.HandleFunc("/about", aboutHandler)
 	http.HandleFunc("/clearreq", requestListHandler)
 	http.HandleFunc("/", defaultHandler)
 }
