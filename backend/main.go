@@ -32,6 +32,74 @@ var lastImage = []byte{}
 var fsm *FSM
 var emailThreshold = time.Now()
 
+func startFSM() {
+	fsm = NewFSM()
+
+	fsm.AddState(0, func(input Input) int {
+		if input == 0 {
+			return 2
+		}
+		return 1
+	})
+	fsm.AddState(1, func(input Input) int {
+		if input != 0 {
+			return 1
+		}
+		return 2
+	})
+	fsm.AddState(2, func(input Input) int {
+		if input != 0 {
+			return 1
+		}
+		return 3
+	})
+	fsm.AddState(3, func(input Input) int {
+		if input != 0 {
+			return 1
+		}
+		return 4
+	})
+	fsm.AddState(4, func(input Input) int {
+		if input != 0 {
+			return 2
+		}
+		return 5
+	})
+	fsm.AddState(5, func(input Input) int {
+		if input != 0 {
+			return 3
+		}
+		sendEmail(lastCount)
+		return 6
+	})
+	fsm.AddState(6, func(input Input) int {
+		if input != 0 {
+			return 1
+		}
+		if time.Now().After(emailThreshold) {
+			sendEmail(lastCount)
+			emailThreshold = time.Now().Add(EMAIL_WAIT)
+		}
+		return 6
+	})
+}
+
+func handleInput() {
+	// Save lastImage into file
+	ioutil.WriteFile("/tmp/lastpicture.jpeg", lastImage, 0644)
+	// Shellout to classifier
+	out, err := exec.Command("/root/alwaysbeer/src/test_bottle_detector", "/root/alwaysbeer/src/single/test_images.xml", "silent").Output()
+	// Get output and make to integer
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	cleanOut := cleanBody(out)
+	fmt.Printf("Output: %s\n", cleanOut)
+	lastCount, _ = strconv.Atoi(cleanOut)
+	fsm.Transition(Input(lastCount))
+}
+
 func sendSlackMessage(msg string) {
 	if notificationsEnabled == false {
 		return
@@ -253,10 +321,6 @@ func listEmailsHandler(w http.ResponseWriter, r *http.Request) {
 	PrintList(w, emailList)
 }
 
-func defaultHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "welcome to the \"inventory bot\"")
-}
-
 func enableEmailHandler(w http.ResponseWriter, r *http.Request) {
 	notificationsEnabled = true
 	fmt.Fprintf(w, "email enabled")
@@ -267,72 +331,22 @@ func disableEmailHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "email disabled")
 }
 
-func handleInput() {
-	// Save lastImage into file
-	ioutil.WriteFile("/tmp/lastpicture.jpeg", lastImage, 0644)
-	// Shellout to classifier
-	out, err := exec.Command("/root/alwaysbeer/src/test_bottle_detector", "/root/alwaysbeer/src/single/test_images.xml", "silent").Output()
-	// Get output and make to integer
+func aboutHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "text/html")
+	err := r.ParseForm()
 	if err != nil {
-		fmt.Println(err)
-		return
+		http.Error(w, fmt.Sprintf("error parsing url %v", err), 500)
 	}
-	cleanOut := cleanBody(out)
-	fmt.Printf("Output: %s\n", cleanOut)
-	lastCount, _ = strconv.Atoi(cleanOut)
-	fsm.Transition(Input(lastCount))
+	tmplt.ExecuteTemplate(w, "about.html", Page{Title: "Square Inventory"})
 }
 
-func startFSM() {
-	fsm = NewFSM()
-
-	fsm.AddState(0, func(input Input) int {
-		if input == 0 {
-			return 2
-		}
-		return 1
-	})
-	fsm.AddState(1, func(input Input) int {
-		if input != 0 {
-			return 1
-		}
-		return 2
-	})
-	fsm.AddState(2, func(input Input) int {
-		if input != 0 {
-			return 1
-		}
-		return 3
-	})
-	fsm.AddState(3, func(input Input) int {
-		if input != 0 {
-			return 1
-		}
-		return 4
-	})
-	fsm.AddState(4, func(input Input) int {
-		if input != 0 {
-			return 2
-		}
-		return 5
-	})
-	fsm.AddState(5, func(input Input) int {
-		if input != 0 {
-			return 3
-		}
-		sendEmail(lastCount)
-		return 6
-	})
-	fsm.AddState(6, func(input Input) int {
-		if input != 0 {
-			return 1
-		}
-		if time.Now().After(emailThreshold) {
-			sendEmail(lastCount)
-			emailThreshold = time.Now().Add(EMAIL_WAIT)
-		}
-		return 6
-	})
+func defaultHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "text/html")
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, fmt.Sprintf("error parsing url %v", err), 500)
+	}
+	tmplt.ExecuteTemplate(w, "test.html", Page{Title: "Square Inventory"})
 }
 
 func requestListHandler(w http.ResponseWriter, r *http.Request) {
@@ -377,6 +391,7 @@ func handleHandlers() {
 	http.HandleFunc("/disableemail", disableEmailHandler)
 	http.HandleFunc("/addreq", requestListHandler)
 	http.HandleFunc("/viewreq", requestListHandler)
+	http.HandleFunc("/about", aboutHandler)
 	http.HandleFunc("/clearreq", requestListHandler)
 	http.HandleFunc("/", defaultHandler)
 }
@@ -385,5 +400,6 @@ func main() {
 	go emailSender()
 	handleHandlers()
 	startFSM()
-	http.ListenAndServe(":8080", nil)
+	//http.ListenAndServe(":8080", nil)
+	http.ListenAndServe("localhost:8080", nil)
 }
