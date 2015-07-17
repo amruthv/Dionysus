@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 )
 
-var tmplt = template.Must(template.ParseFiles("static/test.html"))
+var tmplt = template.Must(template.ParseFiles(fmt.Sprintf("%s/static/test.html", os.Getenv("BACKEND_PATH"))))
 
 type Page struct {
 	Title string
