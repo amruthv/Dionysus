@@ -24,15 +24,16 @@ int main(int argc, char** argv)
     try
     {   
         bool silent = false;
-        if (argc == 3){
+        if (argc == 4){
             silent = true;
         }
-        if (argc < 2)
+        if (argc < 3)
         {
             cout << "Give the path to the training images directory as the argument to this program." << endl;
             return 0;
         }
         const std::string test_xml = argv[1];
+        const std::string item_to_classify = argv[2];
         
         dlib::array<array2d<unsigned char> > images_test;
         std::vector<std::vector<rectangle> > face_boxes_test;
@@ -43,7 +44,7 @@ int main(int argc, char** argv)
 
         typedef scan_fhog_pyramid<pyramid_down<6> > image_scanner_type; 
         object_detector<image_scanner_type> detector;
-        deserialize("bottle_classifier.svm") >> detector;
+        deserialize(item_to_classify + "_classifier.svm") >> detector;
 
         if (!silent) {
             cout << "testing results:  " << test_object_detection_function(detector, images_test, face_boxes_test) << endl;   

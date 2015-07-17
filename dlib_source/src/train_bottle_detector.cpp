@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 
     try
     {
-        if (argc != 2)
+        if (argc != 3)
         {
             cout << "Give the path to the examples/faces directory as the argument to this" << endl;
             cout << "program.  For example, if you are in the examples folder then execute " << endl;
@@ -33,12 +33,18 @@ int main(int argc, char** argv)
             return 0;
         }
         const std::string faces_directory = argv[1];
+        const std::string item_to_classify = argv[2];
         
         dlib::array<array2d<unsigned char> > images_train, images_test;
         std::vector<std::vector<rectangle> > face_boxes_train, face_boxes_test;
 
-        load_image_dataset(images_train, face_boxes_train, faces_directory+"/bottles_dataset.xml");
-        load_image_dataset(images_test, face_boxes_test, faces_directory+"/test_images.xml");
+        if (item_to_classify == "bottle") {
+            load_image_dataset(images_train, face_boxes_train, faces_directory+"/bottles_dataset.xml");
+            load_image_dataset(images_test, face_boxes_test, faces_directory+"/test_images.xml");
+        } else {
+            load_image_dataset(images_train, face_boxes_train, faces_directory+"/cans_dataset.xml");
+            load_image_dataset(images_test, face_boxes_test, faces_directory+"/test_can_images.xml");
+        }
 
         // upsample_image_dataset<pyramid_down<2> >(images_train, face_boxes_train);
         // upsample_image_dataset<pyramid_down<2> >(images_test,  face_boxes_test);
@@ -78,11 +84,11 @@ int main(int argc, char** argv)
         std::string timestamp_dir = "models/" + string(buffer);
         
         mkdir(timestamp_dir.c_str(), 0777);
-        serialize(timestamp_dir + "/bottle_classifier.svm") << detector;
-        serialize("bottle_classifier.svm") << detector;
+        serialize(timestamp_dir + "/" + item_to_classify + "_classifier.svm") << detector;
+        serialize(item_to_classify + "_classifier.svm") << detector;
 
-        std::ifstream src1("helpers/bottles_dataset.xml", std::ios::binary);
-        std::ofstream dst1(timestamp_dir + "/bottles_dataset.xml", std::ios::binary);
+        std::ifstream src1("helpers/" + item_to_classify + "_dataset.xml", std::ios::binary);
+        std::ofstream dst1(timestamp_dir + item_to_classify +  "_dataset.xml", std::ios::binary);
         dst1 << src1.rdbuf();
 
         std::ifstream src2("fetch_images/image_urls.txt", std::ios::binary);
