@@ -356,6 +356,11 @@ func requestListHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	filePath := fmt.Sprintf("%s/home.html", os.Getenv("STATIC_PATH"))
+	http.ServeFile(w, r, filePath)
+}
+
 func PrintList(w http.ResponseWriter, list []string) {
 	for _, item := range list {
 		fmt.Fprintf(w, fmt.Sprintf("%s\n", item))
@@ -364,7 +369,7 @@ func PrintList(w http.ResponseWriter, list []string) {
 
 func handleHandlers() {
 	http.Handle("/apk/", http.StripPrefix("/apk/", http.FileServer(http.Dir(os.Getenv("APK_PATH")))))
-	http.Handle("/", http.StripPrefix("/", http.FileServer(http.Dir(os.Getenv("STATIC_PATH")))))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(os.Getenv("STATIC_PATH")))))
 
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/setcount", countHandler)
@@ -376,7 +381,6 @@ func handleHandlers() {
 	http.HandleFunc("/sendemail", sendEmailHandler)
 	http.HandleFunc("/setimage", setImageHandler)
 	http.HandleFunc("/getimage", getImageHandler)
-	//http.HandleFunc("/apk", getApkHandler)
 	http.HandleFunc("/addslackhook", addSlackHandler)
 	http.HandleFunc("/removelackhook", removeSlackHandler)
 	http.HandleFunc("/enableemail", enableEmailHandler)
@@ -384,6 +388,7 @@ func handleHandlers() {
 	http.HandleFunc("/addreq", requestListHandler)
 	http.HandleFunc("/viewreq", requestListHandler)
 	http.HandleFunc("/clearreq", requestListHandler)
+	http.HandleFunc("/", homeHandler)
 }
 
 func main() {

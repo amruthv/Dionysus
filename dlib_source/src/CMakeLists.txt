@@ -27,7 +27,7 @@ ENDMACRO()
 
 
 #here we apply our macros
-add_example(train_bottle_detector)
+# add_example(train_bottle_detector)
 add_example(test_bottle_detector)
 
 find_package(OpenCV)

@@ -48,21 +48,6 @@ int main(int argc, char** argv)
 
         if (!silent) {
             cout << "testing results:  " << test_object_detection_function(detector, images_test, face_boxes_test) << endl;   
-            image_window hogwin(draw_fhog(detector), "Learned fHOG detector");
-            image_window win; 
-        
-            for (unsigned long i = 0; i < images_test.size(); ++i) {
-                std::vector<rectangle> dets = detector(images_test[i]);
-                
-                cout << "number of detections" << dets.size() << endl;
-                if (dets.size() != 0) {
-                    win.clear_overlay();
-                    win.set_image(images_test[i]);
-                    win.add_overlay(dets, rgb_pixel(255,0,0));
-                    cout << "Hit enter to process the next image..." << endl;
-                    cin.get();
-                }
-            }
         }
         else {
             for (unsigned long i = 0; i < images_test.size(); ++i) {
