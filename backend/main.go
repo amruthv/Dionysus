@@ -26,6 +26,7 @@ var slackHooks = []string{"https://hooks.slack.com/services/T024FALR8/B07P9B45B/
 var emailList = []string{"antoine.pourchet@gmail.com"}
 var lastCount = -1
 var slackToken = ""
+var emailsEnabled = true
 var lastImage = []byte{}
 var fsm *FSM
 var emailThreshold = time.Now()
@@ -59,6 +60,9 @@ func cleanBody(body []byte) string {
 }
 
 func sendEmail(count int) {
+	if emailsEnabled == false {
+		return
+	}
 	fmt.Println("Sending the email")
 
 	subjectString := "ALERT: INVENTORY LOW"
@@ -251,6 +255,16 @@ func defaultHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("welcome to the \"inventory bot\"")
 }
 
+func enableEmailHandler(w http.ResponseWriter, r *http.Request) {
+	emailsEnabled = true
+	fmt.Println("email enabled")
+}
+
+func disableEmailHandler(w http.ResponseWriter, r *http.Request) {
+	emailsEnabled = false
+	fmt.Println("email disabled")
+}
+
 func handleHandlers() {
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/setcount", countHandler)
@@ -264,6 +278,8 @@ func handleHandlers() {
 	http.HandleFunc("/getimage", getImageHandler)
 	http.HandleFunc("/addslackhook", addSlackHandler)
 	http.HandleFunc("/removelackhook", removeSlackHandler)
+	http.HandleFunc("/enableemail", enableEmailHandler)
+	http.HandleFunc("/disableemail", disableEmailHandler)
 	http.HandleFunc("/", defaultHandler)
 }
 
