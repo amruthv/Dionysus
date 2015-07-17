@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/smtp"
+	"os"
 	"os/exec"
 	"strconv"
 	"strings"
@@ -377,7 +378,7 @@ func PrintList(w http.ResponseWriter, list []string) {
 }
 
 func handleHandlers() {
-	//http.Handle("/apk", http.FileServer(http.Dir("../mobile/apk/app-debug-unaligned.apk")))
+	http.Handle("/apk/", http.StripPrefix("/apk/", http.FileServer(http.Dir(os.Getenv("APK_PATH")))))
 
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/setcount", countHandler)
@@ -389,7 +390,7 @@ func handleHandlers() {
 	http.HandleFunc("/sendemail", sendEmailHandler)
 	http.HandleFunc("/setimage", setImageHandler)
 	http.HandleFunc("/getimage", getImageHandler)
-	http.HandleFunc("/apk", getApkHandler)
+	//http.HandleFunc("/apk", getApkHandler)
 	http.HandleFunc("/addslackhook", addSlackHandler)
 	http.HandleFunc("/removelackhook", removeSlackHandler)
 	http.HandleFunc("/enableemail", enableEmailHandler)
@@ -406,6 +407,6 @@ func main() {
 	go emailSender()
 	handleHandlers()
 	startFSM()
-	http.ListenAndServe(":8080", nil)
-	//http.ListenAndServe("localhost:6969", nil)
+	//http.ListenAndServe(":8080", nil)
+	http.ListenAndServe("localhost:6969", nil)
 }
