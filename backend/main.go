@@ -337,12 +337,6 @@ func getApkHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%s", apk)
 }
 
-func defaultHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "text/html")
-	html, _ := ioutil.ReadFile("../static/test.html")
-	fmt.Fprintf(w, "%s", html)
-}
-
 func requestListHandler(w http.ResponseWriter, r *http.Request) {
 	var itemReq string
 	if strings.Contains(r.URL.Path, "add") {
@@ -390,7 +384,6 @@ func handleHandlers() {
 	http.HandleFunc("/addreq", requestListHandler)
 	http.HandleFunc("/viewreq", requestListHandler)
 	http.HandleFunc("/clearreq", requestListHandler)
-	http.HandleFunc("/", defaultHandler)
 }
 
 func main() {
