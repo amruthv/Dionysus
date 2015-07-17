@@ -268,24 +268,6 @@ func disableEmailHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("email disabled")
 }
 
-func handleHandlers() {
-	http.HandleFunc("/_status", statusHandler)
-	http.HandleFunc("/setcount", countHandler)
-	http.HandleFunc("/setslacksecret", secretHandler)
-	http.HandleFunc("/lastcount", lastCountHandler)
-	http.HandleFunc("/addemail", addEmailHandler)
-	http.HandleFunc("/listemails", listEmailsHandler)
-	http.HandleFunc("/removeemail", removeEmailHandler)
-	http.HandleFunc("/sendemail", sendEmailHandler)
-	http.HandleFunc("/setimage", setImageHandler)
-	http.HandleFunc("/getimage", getImageHandler)
-	http.HandleFunc("/addslackhook", addSlackHandler)
-	http.HandleFunc("/removelackhook", removeSlackHandler)
-	http.HandleFunc("/enableemail", enableEmailHandler)
-	http.HandleFunc("/disableemail", disableEmailHandler)
-	http.HandleFunc("/", defaultHandler)
-}
-
 func handleInput() {
 	// Save lastImage into file
 	ioutil.WriteFile("/tmp/lastpicture.jpeg", lastImage, 0644)
@@ -352,6 +334,24 @@ func startFSM() {
 		}
 		return 6
 	})
+}
+
+func handleHandlers() {
+	http.HandleFunc("/_status", statusHandler)
+	http.HandleFunc("/setcount", countHandler)
+	http.HandleFunc("/setslacksecret", secretHandler)
+	http.HandleFunc("/lastcount", lastCountHandler)
+	http.HandleFunc("/addemail", addEmailHandler)
+	http.HandleFunc("/listemails", listEmailsHandler)
+	http.HandleFunc("/removeemail", removeEmailHandler)
+	http.HandleFunc("/sendemail", sendEmailHandler)
+	http.HandleFunc("/setimage", setImageHandler)
+	http.HandleFunc("/getimage", getImageHandler)
+	http.HandleFunc("/addslackhook", addSlackHandler)
+	http.HandleFunc("/removelackhook", removeSlackHandler)
+	http.HandleFunc("/enableemail", enableEmailHandler)
+	http.HandleFunc("/disableemail", disableEmailHandler)
+	http.HandleFunc("/", defaultHandler)
 }
 
 func main() {
