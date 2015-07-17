@@ -24,6 +24,7 @@ const EMAIL_WAIT = time.Second * 30
 
 var slackHooks = []string{"https://hooks.slack.com/services/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"}
 var emailList = []string{"antoine.pourchet@gmail.com"}
+var requestList = []string{}
 var lastCount = -1
 var slackToken = ""
 var notificationsEnabled = true
@@ -249,9 +250,7 @@ func addSlackHook(slack string) []string {
 }
 
 func listEmailsHandler(w http.ResponseWriter, r *http.Request) {
-	for _, email := range emailList {
-		fmt.Fprintf(w, email)
-	}
+	PrintList(w, emailList)
 }
 
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
@@ -336,6 +335,31 @@ func startFSM() {
 	})
 }
 
+func requestListHandler(w http.ResponseWriter, r *http.Request) {
+	var itemReq string
+	if strings.Contains(r.URL.Path, "add") {
+		if len(r.URL.RawQuery) == 0 {
+			body, _ := ioutil.ReadAll(r.Body)
+			itemReq = cleanBody(body)
+		} else {
+			itemReq = r.URL.Query().Get("item")
+		}
+		requestList = append(requestList, itemReq)
+	} else if strings.Contains(r.URL.Path, "view") {
+		PrintList(w, requestList)
+	} else if strings.Contains(r.URL.Path, "clear") {
+		requestList = []string{}
+	} else {
+		fmt.Fprintf(w, "ok")
+	}
+}
+
+func PrintList(w http.ResponseWriter, list []string) {
+	for _, item := range list {
+		fmt.Fprintf(w, item)
+	}
+}
+
 func handleHandlers() {
 	http.HandleFunc("/_status", statusHandler)
 	http.HandleFunc("/setcount", countHandler)
@@ -351,6 +375,9 @@ func handleHandlers() {
 	http.HandleFunc("/removelackhook", removeSlackHandler)
 	http.HandleFunc("/enableemail", enableEmailHandler)
 	http.HandleFunc("/disableemail", disableEmailHandler)
+	http.HandleFunc("/addreq", requestListHandler)
+	http.HandleFunc("/viewreq", requestListHandler)
+	http.HandleFunc("/clearreq", requestListHandler)
 	http.HandleFunc("/", defaultHandler)
 }
 
