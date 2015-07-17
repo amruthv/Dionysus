@@ -340,6 +340,11 @@ func aboutHandler(w http.ResponseWriter, r *http.Request) {
 	tmplt.ExecuteTemplate(w, "about.html", Page{Title: "Square Inventory"})
 }
 
+func getApkHandler(w http.ResponseWriter, r *http.Request) {
+	apk, _ := ioutil.ReadFile("../mobile/apk/app-debug-unaligned.apk")
+	fmt.Fprintf(w, "%s", apk)
+}
+
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "text/html")
 	err := r.ParseForm()
@@ -385,6 +390,7 @@ func handleHandlers() {
 	http.HandleFunc("/sendemail", sendEmailHandler)
 	http.HandleFunc("/setimage", setImageHandler)
 	http.HandleFunc("/getimage", getImageHandler)
+	http.HandleFunc("/apk", getApkHandler)
 	http.HandleFunc("/addslackhook", addSlackHandler)
 	http.HandleFunc("/removelackhook", removeSlackHandler)
 	http.HandleFunc("/enableemail", enableEmailHandler)
@@ -401,5 +407,5 @@ func main() {
 	handleHandlers()
 	startFSM()
 	//http.ListenAndServe(":8080", nil)
-	http.ListenAndServe("localhost:8080", nil)
+	http.ListenAndServe("localhost:6969", nil)
 }
