@@ -406,6 +406,6 @@ func main() {
 	go emailSender()
 	handleHandlers()
 	startFSM()
-	//http.ListenAndServe(":8080", nil)
-	http.ListenAndServe("localhost:6969", nil)
+	http.ListenAndServe(":8080", nil)
+	//http.ListenAndServe("localhost:6969", nil)
 }
