@@ -26,12 +26,15 @@ var slackHooks = []string{"https://hooks.slack.com/services/T024FALR8/B07P9B45B/
 var emailList = []string{"antoine.pourchet@gmail.com"}
 var lastCount = -1
 var slackToken = ""
-var emailsEnabled = true
+var notificationsEnabled = true
 var lastImage = []byte{}
 var fsm *FSM
 var emailThreshold = time.Now()
 
 func sendSlackMessage(msg string) {
+	if notificationsEnabled == false {
+		return
+	}
 	message := fmt.Sprintf("{\"text\": \"%s\"}", msg)
 	for _, hook := range slackHooks {
 		resp, err := http.Post(hook, "text", bytes.NewReader([]byte(message)))
@@ -60,7 +63,7 @@ func cleanBody(body []byte) string {
 }
 
 func sendEmail(count int) {
-	if emailsEnabled == false {
+	if notificationsEnabled == false {
 		return
 	}
 	fmt.Println("Sending the email")
@@ -256,12 +259,12 @@ func defaultHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func enableEmailHandler(w http.ResponseWriter, r *http.Request) {
-	emailsEnabled = true
+	notificationsEnabled = true
 	fmt.Println("email enabled")
 }
 
 func disableEmailHandler(w http.ResponseWriter, r *http.Request) {
-	emailsEnabled = false
+	notificationsEnabled = false
 	fmt.Println("email disabled")
 }
 
