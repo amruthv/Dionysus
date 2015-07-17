@@ -250,22 +250,22 @@ func addSlackHook(slack string) []string {
 
 func listEmailsHandler(w http.ResponseWriter, r *http.Request) {
 	for _, email := range emailList {
-		fmt.Println(email)
+		fmt.Fprintf(w, email)
 	}
 }
 
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("welcome to the \"inventory bot\"")
+	fmt.Fprintf(w, "welcome to the \"inventory bot\"")
 }
 
 func enableEmailHandler(w http.ResponseWriter, r *http.Request) {
 	notificationsEnabled = true
-	fmt.Println("email enabled")
+	fmt.Fprintf(w, "email enabled")
 }
 
 func disableEmailHandler(w http.ResponseWriter, r *http.Request) {
 	notificationsEnabled = false
-	fmt.Println("email disabled")
+	fmt.Fprintf(w, "email disabled")
 }
 
 func handleInput() {
