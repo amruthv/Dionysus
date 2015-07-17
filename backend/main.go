@@ -402,6 +402,7 @@ func handleHandlers() {
 }
 
 func main() {
+	fmt.Println("****STARTING THE SERVER!")
 	go emailSender()
 	handleHandlers()
 	startFSM()

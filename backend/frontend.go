@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-var tmplt = template.Must(template.ParseFiles(fmt.Sprintf("%s/static/test.html", os.Getenv("BACKEND_PATH"))))
+var tmplt = template.Must(template.ParseFiles(fmt.Sprintf("%s/static/test.html", os.Getenv("ROOT_PATH"))))
 
 type Page struct {
 	Title string
