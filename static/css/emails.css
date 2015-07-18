@@ -1,0 +1,11 @@
+div.transbox {
+    position: absolute;
+    width: 555px;
+    padding: 20px;
+    background-color: #ffffff;
+    opacity:0.8;
+    filter:alpha(opacity=60); /* For IE8 and earlier */
+    
+    top: 45%;
+    left: 30%;
+}

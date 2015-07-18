@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $('#emailToOperate').focus();
     $('#submit_btn').on('click', (function() {
         option = $('#emailOption').val()
         email = $('#emailToOperate').val();
