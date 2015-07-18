@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="css/select2.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/select2.js"></script>
+    <script src="js/emails.js"></script>
+
+    <style type="text/css">
+      body {padding-bottom: 70px;}
+      .content {margin:10px;}
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/getimage">Main</a>
+      </div>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+    <form class='form-inline'>
+      <div class="form-group">
+        <select id='emailOption' class="form-control" style="width:150px">
+          <option value="add">Add email</option>
+          <option value="remove">Remove email</option>
+      </select>
+      <input type="email" class="form-control" id="emailToOperate" name="email" placeholder="Email" style="width:280px">
+      <button type="button" id='submit_btn' class="btn btn-default">Submit</button>
+    </form>
+  </body>
+</html>
